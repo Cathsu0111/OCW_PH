@@ -36,8 +36,8 @@
                         </div>
                         <div class="text-wrap text-center">
                             <p>
-                                <span class="language_replace">サイト点検中</span><br>　
-                                <span class="language_replace">しばらく待ってから、お戻りください。</span><br><br>
+                                <span class="language_replace">Lucky Fanta in currently down for maintenance</span><br>　
+                                <span class="language_replace">Please wait a moment, we will be right back!</span><br><br>
                                 <span class="language_replace"><%:MaintainMessage%></span>                                
                             </p> 
                             <!-- <p><span class="language_replace">您點選的頁面沒有反應，請回到首頁。</span></p> -->
@@ -46,7 +46,7 @@
                             <a href="index.aspx" class="square-link outline">
                                 <i class="icon-home"></i>
                                 <!-- <span class="language_replace">首頁</span> -->
-                                <span class="language_replace">ホームページ</span>
+                                <span class="language_replace">HOMEPAGE</span>
                             </a>
                         </div>
                     </section>
