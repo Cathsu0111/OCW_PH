@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maharaja</title>
+    <title>Lucky Fanta</title>
 
     <link rel="stylesheet" href="Scripts/OutSrc/lib/bootstrap/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/icons.css?<%:Version%>" type="text/css" />
@@ -118,6 +118,8 @@
 
     function CheckPassword() {
         var idLoginPassword = document.getElementById("idLoginPassword");
+        var idLoginCheckPassword = document.getElementById("idLoginCheckPassword");
+        
         var rules = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')
         if (idLoginPassword.value == "") {
             window.parent.showMessageOK("", mlp.getLanguageKey("請輸入登入密碼"));
@@ -127,6 +129,9 @@
             return false;
         } else if (!rules.test(idLoginPassword.value)) {
             window.parent.showMessageOK("", mlp.getLanguageKey("請輸入半形的英文大小寫/數字，至少要有一個英文大寫與英文小寫與數字"));
+            return false;
+        } else if (idLoginPassword.value.trim() != idLoginCheckPassword.value.trim()) {
+            window.parent.showMessageOK("", mlp.getLanguageKey("確認密碼與登入密碼不符"));
             return false;
         }
 
@@ -169,6 +174,10 @@
         if ($("#idValidateCode").val() == "") {
             window.parent.showMessageOK("", mlp.getLanguageKey("請輸入驗證碼"));
         } else {
+            if (!CheckPassword()) {
+                return;
+            }
+
             p.CheckValidateCode(Math.uuid(), 1, "", $("#idPhonePrefix").val(), $("#idPhoneNumber").val(), $("#idValidateCode").val(), function (success, o) {
                 if (success) {
                     if (o.Result != 0) {
@@ -193,19 +202,26 @@
         //完整註冊
         if ($("#li_register2").hasClass("active")) {
             if (form2.Name1.value == "") {
-                form2.Name1.setCustomValidity(mlp.getLanguageKey("請輸入姓"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入姓"));
+                return;
             } else if (form2.Name2.value == "") {
-                form2.Name2.setCustomValidity(mlp.getLanguageKey("請輸入名"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入名"));
+                return;
             } else if (form2.BornYear.value.length != 4) {
-                form2.BornYear.setCustomValidity(mlp.getLanguageKey("請輸入正確年分"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入正確年分"));
+                return;
             } else if (parseInt(form2.BornYear.value) < 1900) {
-                form2.BornYear.setCustomValidity(mlp.getLanguageKey("請輸入正確年分"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入正確年分"));
+                return;
             } else if (parseInt(form2.BornYear.value) > nowYear) {
-                form2.BornYear.setCustomValidity(mlp.getLanguageKey("請輸入正確年分"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入正確年分"));
+                return;
             }  else if (form2.Email.value == "") {
-                form2.Email.setCustomValidity(mlp.getLanguageKey("請輸入正確信箱"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入正確信箱"));
+                return;
             } else if (!IsEmail(form2.Email.value)) {
-                form2.Email.setCustomValidity(mlp.getLanguageKey("請輸入正確信箱"));
+                window.parent.showMessageOK("", mlp.getLanguageKey("請輸入正確信箱"));
+                return;
             } 
         }
 
@@ -530,14 +546,14 @@
                             <div class="form-group col phonePrefix">
                                 <label class="form-title language_replace">國碼</label>
                                 <div class="input-group">
-                                    <input id="idPhonePrefix" type="text" class="form-control custom-style"name="PhonePrefix" placeholder="+81" inputmode="decimal" value="+81" onchange="onChangePhonePrefix()">
+                                    <input id="idPhonePrefix" type="text" class="form-control custom-style"name="PhonePrefix" placeholder="+63" inputmode="decimal" value="+63" onchange="onChangePhonePrefix()">
                                     <div class="invalid-feedback language_replace">請輸入國碼</div>
                                 </div>
                             </div>
                             <div class="form-group col">
                                 <label class="form-title language_replace">手機電話號碼</label>
                                 <div class="input-group">
-                                    <input id="idPhoneNumber" type="text" class="form-control custom-style"name="PhoneNumber" language_replace="placeholder" placeholder="000-0000-0000 (最前面的00請勿輸入)" inputmode="decimal">
+                                    <input id="idPhoneNumber" type="text" class="form-control custom-style"name="PhoneNumber" language_replace="placeholder" placeholder="000-000-0000" inputmode="decimal">
                                     <div class="invalid-feedback language_replace">請輸入正確電話</div>
                                 </div>
                             </div>
@@ -549,9 +565,9 @@
                         </div>
                         <div class="form-group">
                             <div class="text-s text-indent">
-                                <label class=" language_replace">手機驗證相關說明：</label></br>
-                                <label class=" language_replace">1.輸入手機號碼後點擊『傳送驗證碼』後，驗證碼將會發送到您的手機簡訊。</label></br>
-                                <label class=" language_replace">2.將手機簡訊內的驗證碼回填於下方輸入框內。</label></br>
+                                <label class="language_replace">手機驗證相關說明：</label></br>
+                                <label class="language_replace">1.輸入手機號碼後點擊『傳送驗證碼』後，驗證碼將會發送到您的手機簡訊。</label></br>
+                                <label class="language_replace">2.將手機簡訊內的驗證碼回填於下方輸入框內。</label></br>
                             </div>
                         </div>
                         
@@ -571,7 +587,7 @@
                         <div class="form-group">
                             <label class="form-title language_replace">密碼</label>
                             <div class="input-group">
-                                <input id="idLoginPassword" name="LoginPassword" type="password" class="form-control custom-style" language_replace="placeholder" placeholder="字母和數字的組合在20個字符以內" inputmode="email">
+                                <input id="idLoginPassword" name="LoginPassword" type="password" class="form-control custom-style" language_replace="placeholder" placeholder="字母和數字的組合需大於6個字符" inputmode="email">
                                 <div class="invalid-feedback language_replace">請輸入密碼</div>
                             </div>
                             <button class="btn btn-icon" type="button" onclick="showPassword('idLoginPassword')">
@@ -581,7 +597,7 @@
                         <div class="form-group">
                             <label class="form-title language_replace">確認密碼</label>
                             <div class="input-group">
-                                <input id="idLoginCheckPassword" name="LoginPassword" type="password" class="form-control custom-style" language_replace="placeholder" placeholder="字母和數字的組合在20個字符以內" inputmode="email">
+                                <input id="idLoginCheckPassword" name="LoginPassword" type="password" class="form-control custom-style" language_replace="placeholder" placeholder="字母和數字的組合需大於6個字符" inputmode="email">
                                 <div class="invalid-feedback language_replace">確認密碼</div>
                             </div>
                             <button class="btn btn-icon" type="button" onclick="showPassword('idLoginCheckPassword')">
@@ -668,25 +684,19 @@
                         </div>
                     </div>
                     <div class="form-group rules-privacy text-small">
-                        <p class="language_replace text-s">點選「開設帳號」就代表理解隱私權政策，也同意利用規約還有在マハラジャ不能持有複數的帳號這個條件。</p>
+                        <p class="language_replace text-s">點選「開設帳號」就代表理解隱私權政策，也同意利用規約還有在Lucky Fanta不能持有複數的帳號這個條件。</p>
                     </div>
-                    <div class="btn-container">
+                    <div class="btn-container pb-4">
                         <button type="button" class="btn btn-primary" onclick="onBtnUserRegisterStep1()">
                             <span class="language_replace">註冊</span>
                         </button>
                     </div>
 
-                    <div class="get-start-header">
+                    <div class="get-start-header mt-0 mb-5">
                         <div class="language_replace">已有帳號了?</div>
                         <button type="button" class="btn btn-outline-primary btn-sm" onclick="window.parent.API_LoadPage('Login', 'Login.aspx')">
                             <span class="language_replace">前往登入</span>
                         </button>
-                    </div>
-                    <div class="form-group">
-                        <div class="LineOfficialQrcode">
-                            <p class="QrCode"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6AQAAAACgl2eQAAABrklEQVR4Xu2YXYrDMAyEBT5AjuSr+0g+gEGrmXHYbFna1w5YuMGRvpdBP3Ya+d5GvHpe7ACyA8gOICMwouwaOXtcyTUWXIrZAPVbVzaSbfZVwLX9RkCJohOrZQZfIdwPQJoqWjKdgYHQlVQKvXZAsuSCZUb/+Lcmvxyo7MRdcnvBpZgLINvZgcDZH14ngMWGOaY0SawVgNSkJnD0NoNDAE8vIGcsHCWxdu9jlDWmzAgI+FNRhTTQvIDSFVHJykoW8lXu6AhbAWp8JIvR0lgbOY2AqrcFXaUXTqpGK1kBfC2ZXCSxeci0ARbbBNEJgX+HmAWAxiHWU2JnoPcnYz5AY9VhIMvPw0UZ9AE2gycbH3DaAdhjAvBYUcug5J7HogOwy6wMoa7GSZoRQKWdBGYyxpd6xwsoXXhLtUxCKSR7AY0XRbY/OmhRr/LlA8hQeJRMuCK/Mi2AAVV7CGMj1TgirYDE5Qo5Qu1hdlGmG8A5XEMYehNZ4+ZRk05A5YiftIsHyrPkrICe90VLTi8gUXJIVuJMBxz7XzgnoAoMnvtLUIxU+wDv7ACyA8gOIPsM/AA5dNe87D/VlAAAAABJRU5ErkJggg==" alt=""></p>
-                            <p class="text-note text-gray language_replace">* 若有任何問題歡迎資詢マハラジャ官方Line客服</p>
-                        </div>
                     </div>
 
                 </div>
@@ -698,7 +708,7 @@
                     <h1>Welcome</h1>
                 </div>
                 <div class="heading-sub-desc text-wrap">
-                    <h5 class="mb-4 language_replace">歡迎來到 Fanta！</h5>
+                    <h5 class="mb-4 language_replace">歡迎來到 Lucky Fanta！</h5>
                     <p class="language_replace">感謝您註冊我們的新會員，真正非常的感謝您 ！</p>
                     <p>
                         <span class="language_replace">您現在可以馬上進入遊戲裡盡情的遊玩我們為您準備的優質遊戲。</span>

@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maharaja</title>
+    <title>Lucky Fanta</title>
 
     <link rel="stylesheet" href="Scripts/OutSrc/lib/bootstrap/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/icons.css?<%:Version%>" type="text/css" />
@@ -738,12 +738,12 @@
                     <div class="main-panel cryptopanel" data-deposite="step2">
                        
                         <div class="box-item-container">                           
-                               <div class="card-item-intro">
+                            <%--   <div class="card-item-intro">
                                    <div class="img-crop"><img src="/images/CASHCARD.png"></div>
                                   
-                              </div>
+                              </div>--%>
                                <!-- 溫馨提醒 -->
-                            <div class="notice-container mt-4 mt-md-5 mb-2">
+                        <%--    <div class="notice-container mt-4 mt-md-5 mb-2">
                                 <div class="notice-item">
                                     <i class="icon-info_circle_outline"></i>     
                                     <div class="text-wrap">
@@ -757,7 +757,7 @@
                                          </ul>  
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
 

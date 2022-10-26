@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Maharaja</title>
+    <title>Lucky Fanta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/basic.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -56,7 +56,7 @@
 
             if (LobbyClient != null) {
                 //可領取獎金
-                GetPromotionCollectAvailable(1);
+                GetPromotionCollectAvailable(2);
                 //領取紀錄
                 let now_date = Date.today().moveToFirstDayOfMonth().toString("yyyy/MM/dd");
                 search_Year = now_date.split('/')[0];
@@ -393,19 +393,19 @@
                     <div class="sec-title-wrapper">
                         <h1 class="sec-title title-deco"><span class="language_replace">領獎中心</span></h1>
                         <!-- 使用說明LINK -->
-                        <span class="sec-title-intro-link" onclick="window.parent.API_LoadPage('Prize','/Guide/prize.html', true)">
+                      <%--  <span class="sec-title-intro-link" onclick="window.parent.API_LoadPage('Prize','/Guide/prize.html', true)">
                             <span class="btn btn-QA-transaction btn-full-stress btn-round"><i class="icon icon-mask icon-question"></i></span><span class="title language_replace">領獎中心使用說明</span>
-                        </span>                       
+                        </span>        --%>               
                     </div>
                      <!-- 獎金/禮金 TAB -->
                      <div class="tab-prize tab-scroller tab-2 tab-primary">
                         <div class="tab-scroller__area">
                             <ul class="tab-scroller__content">
-                                <li class="tab-item active" id="li_bonus1" onclick="GetPromotionCollectAvailable(1)">
+                                <li class="tab-item " id="li_bonus1" onclick="GetPromotionCollectAvailable(1)">
                                     <span class="tab-item-link"><span class="title language_replace">獎金</span>
                                     </span>
                                 </li>
-                                <li class="tab-item" id="li_bonus2" onclick="GetPromotionCollectAvailable(2)">
+                                <li class="tab-item active" id="li_bonus2" onclick="GetPromotionCollectAvailable(2)">
                                     <span class="tab-item-link"><span class="title language_replace">禮金</span></span>
                                 </li>
                             </ul>
